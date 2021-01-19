@@ -1,0 +1,32 @@
+{
+    "name": "cupoftea/config-editor",
+    "description": "Programatically edit php array based configuration files.",
+    "keywords": [
+        "config",
+        "configuration",
+        "editor",
+        "php",
+        "array"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Frankie Wittevrongel",
+            "email": "frankie@cupoftea.io"
+        }
+    ],
+    "require": {
+        "illuminate/support": "^8.22",
+        "nikic/php-parser": "^4.10"
+    },
+    "autoload": {
+        "psr-4": {
+            "CupOfTea\\Config\\": "src/"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
