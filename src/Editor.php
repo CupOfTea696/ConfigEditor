@@ -6,10 +6,35 @@ use PhpParser\Node;
 use Illuminate\Support\Arr;
 use PhpParser\NodeTraverser;
 use PhpParser\ParserFactory;
+use CupOfTea\Package\Package;
 use PhpParser\PrettyPrinter\Standard;
+use CupOfTea\Package\Contracts\Package as PackageContract;
 
-class Editor
+class Editor implements PackageContract
 {
+    use Package;
+
+    /**
+     * Package Vendor.
+     *
+     * @const string
+     */
+    public const VENDOR = 'CupOfTea';
+
+    /**
+     * Package Name.
+     *
+     * @const string
+     */
+    public const PACKAGE = 'SemVer';
+
+    /**
+     * Package Version.
+     *
+     * @const string
+     */
+    public const VERSION = '0.0.0';
+
     /**
      * @var string
      */

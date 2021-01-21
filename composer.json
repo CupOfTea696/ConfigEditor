@@ -8,6 +8,7 @@
         "php",
         "array"
     ],
+    "homepage": "https://github.com/CupOfTea696/ConfigEditor",
     "license": "MIT",
     "authors": [
         {
@@ -16,17 +17,23 @@
         }
     ],
     "require": {
+        "php": "^7.3 || ^8.0",
+        "cupoftea/package": "^1.4",
         "illuminate/support": "^8.22",
         "nikic/php-parser": "^4.10"
+    },
+    "config": {
+        "sort-packages": true
     },
     "autoload": {
         "psr-4": {
             "CupOfTea\\Config\\": "src/"
         }
     },
-    "config": {
-        "sort-packages": true
-    },
     "minimum-stability": "dev",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "support": {
+        "issues": "https://github.com/CupOfTea696/ConfigEditor/issues",
+        "source": "https://github.com/CupOfTea696/ConfigEditor"
+    }
 }
