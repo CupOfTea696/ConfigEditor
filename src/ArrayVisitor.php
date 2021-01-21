@@ -99,7 +99,7 @@ class ArrayVisitor extends NodeVisitorAbstract
         }
 
         if ($node instanceof Node\Expr\ArrayItem) {
-            $this->current[] = $node->key->value ?? $this->getIndex();
+            $this->current[] = $this->getKey($node);
             $key = implode('.', $this->current);
 
             if (Arr::has($this->set, $key)) {
@@ -188,6 +188,21 @@ class ArrayVisitor extends NodeVisitorAbstract
     }
 
     /**
+     * Get the key of the given ArrayItem
+     *
+     * @param  \PhpParser\Node\Expr\ArrayItem  $node
+     * @return string|int
+     */
+    protected function getKey(Node\Expr\ArrayItem $node)
+    {
+        if (! $node->key || ! property_exists($node->key, 'value') || ! $node->key->value) {
+            return $this->getIndex();
+        }
+
+        return $node->key->value;
+    }
+
+    /**
      * Get the index for an indexed array item.
      *
      * @return int
@@ -263,6 +278,7 @@ class ArrayVisitor extends NodeVisitorAbstract
             $currentKey = implode('.', $path);
 
             if ($node = Arr::get($this->cache, $currentKey)) {
+                /** @var \PhpParser\Node\Expr\Array_ $node */
                 $array = $node;
 
                 break;
@@ -277,7 +293,7 @@ class ArrayVisitor extends NodeVisitorAbstract
             $currentKey = implode('.', $currentPath);
 
             $node = $this->getFinder()->findFirst($array, function (Node $node) use ($key) {
-                return $node instanceof Node\Expr\ArrayItem && $node->key && $node->key->value === $key;
+                return $node instanceof Node\Expr\ArrayItem && $this->getKey($node) === $key;
             });
 
             if (! $node) {
@@ -288,7 +304,8 @@ class ArrayVisitor extends NodeVisitorAbstract
 
                 $this->cache[$currentKey] = $array = $node;
             } else {
-                if (! $node->value instanceof Node\Expr\Array_) {
+                /** @var \PhpParser\Node\Expr\ArrayItem $node */
+                if (! ($value = $node->value) instanceof Node\Expr\Array_) {
                     throw new InvalidKeyException(sprintf(
                         'Could not set "%s" because "%s" is not an array',
                         $dotKey,
@@ -296,7 +313,8 @@ class ArrayVisitor extends NodeVisitorAbstract
                     ));
                 }
 
-                $array = $node->value;
+                /** @var \PhpParser\Node\Expr\Array_ $value */
+                $array = $value;
             }
         }
 
