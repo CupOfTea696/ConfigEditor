@@ -26,7 +26,7 @@ class Editor implements PackageContract
      *
      * @const string
      */
-    public const PACKAGE = 'SemVer';
+    public const PACKAGE = 'ConfigEditor';
 
     /**
      * Package Version.
