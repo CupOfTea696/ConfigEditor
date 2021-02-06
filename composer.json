@@ -1,6 +1,6 @@
 {
     "name": "cupoftea/config-editor",
-    "description": "Programatically edit php array based configuration files.",
+    "description": "Programatically edit array-based php configuration files.",
     "keywords": [
         "config",
         "configuration",

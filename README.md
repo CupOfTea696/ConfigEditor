@@ -1,3 +1,3 @@
 # Config Editor
 
-Programatically edit php array-based configuration files.
+Programatically edit array-based php configuration files.
