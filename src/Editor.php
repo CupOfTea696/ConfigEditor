@@ -33,7 +33,7 @@ class Editor implements PackageContract
      *
      * @const string
      */
-    public const VERSION = '0.0.0';
+    public const VERSION = 'v1.0.0';
 
     /**
      * @var string
