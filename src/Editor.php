@@ -145,8 +145,9 @@ class Editor implements PackageContract
 
         $this->validate();
 
-        $this->traverser->addVisitor(new ArrayVisitor($this->set, $this->unset));
+        $this->traverser->addVisitor($visitor = (new ArrayVisitor($this->set, $this->unset)));
         $this->traverser->traverse($this->config);
+        $this->traverser->removeVisitor($visitor);
 
         return $this->doCompile();
     }
