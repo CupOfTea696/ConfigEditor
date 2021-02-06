@@ -63,12 +63,12 @@ class Editor implements PackageContract
     /**
      * @var array
      */
-    protected $set;
+    protected $set = [];
 
     /**
      * @var array
      */
-    protected $unset;
+    protected $unset = [];
 
     /**
      * @var \PhpParser\Node\Expr\Array_[]
