@@ -74,7 +74,7 @@ class ArrayVisitor extends NodeVisitorAbstract
     public function beforeTraverse(array $nodes)
     {
         $this->set = Arr::dot($this->set);
-        $this->unset = array_flip($this->parseUnset($this->unset));
+        $this->unset = array_fill_keys($this->parseUnset($this->unset), true);
 
         $all = array_unique(array_merge(
             array_keys($this->set),
@@ -82,6 +82,10 @@ class ArrayVisitor extends NodeVisitorAbstract
         ));
 
         $this->status = array_fill_keys($all, false);
+
+        uksort($this->status, static function ($a, $b) {
+           return strlen($a) <=> strlen($b);
+        });
 
         return null;
     }
