@@ -169,10 +169,6 @@ class ArrayVisitor extends NodeVisitorAbstract
     protected function parseUnset(array $unset): array
     {
         return array_unique(collect($unset)->reduceWithKeys(function (?array $carry, $value, $key) {
-            if (is_null($carry)) {
-                $carry = [];
-            }
-
             if (is_array($value)) {
                 $subValues = $this->parseUnset($value);
 
@@ -184,7 +180,7 @@ class ArrayVisitor extends NodeVisitorAbstract
             }
 
             return $carry;
-        }));
+        }, []));
     }
 
     /**
